@@ -1,8 +1,6 @@
 import cv2
 import face_recognition
 import pickle
-import tkinter as tk
-from tkinter import messagebox
 from threading import Thread
 
 class TreeNode:
@@ -130,10 +128,6 @@ class FaceRecognition:
         self.video_capture.release()
         cv2.destroyAllWindows()
 
-    def show_hierarchy(self):
-        all_roles = self.role_hierarchy.get_all_roles()
-        messagebox.showinfo("Role Hierarchy", "Hierarchy:\n" + "\n".join(map(str, all_roles)))
-
     def start_recognizer_thread(self):
         self.recognizer_thread.start()
 
@@ -141,13 +135,11 @@ class FaceRecognition:
         self.start_recognizer_thread()
 
         while True:
-            cmd = input("Enter 'l' to learn face, 'f' to toggle face recognition, 'h' to show hierarchy, 'c' to check file access, 'q' to quit: ").strip()
+            cmd = input("Enter 'l' to learn face, 'f' to toggle face recognition, 'c' to check file access, 'q' to quit: ").strip()
             if cmd == 'l':
                 self.learn_face()
             elif cmd == 'f':
                 self.recognize_face()
-            elif cmd == 'h':
-                self.show_hierarchy()
             elif cmd == 'c':
                 file_path = input("Enter the file path to check access: ").strip()
                 self.check_file_access(file_path)
